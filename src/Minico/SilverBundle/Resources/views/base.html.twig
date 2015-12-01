@@ -1,0 +1,80 @@
+{% block head %}
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('bundles/minicosilver/css/jquery-ui.css') }}">
+            <link rel="stylesheet" href="{{ asset('bundles/minicosilver/css/jquery-ui.structure.css') }}">
+            <link rel="stylesheet" href="{{ asset('bundles/minicosilver/css/demos.css') }}">
+            <link rel="stylesheet" href="{{ asset('bundles/minicosilver/css/jquery-ui.theme.css') }}">
+            <link rel="stylesheet" href="{{ asset('bundles/minicosilver/css/jquery.ui.datepicker.css') }}">
+            <link rel="icon" sizes="16x16" href="{{ asset('favicon.ico') }}" />
+            <link href="{{ asset('bundles/framework/css/structure.css') }}" rel="stylesheet" />
+            <link href="{{ asset('bundles/framework/css/body.css') }}" rel="stylesheet" />
+            {#<link rel="stylesheet" href="{{ asset('bundles/acmedemo/css/demo.css') }}" />#}
+            {#<link rel="stylesheet" href="{{ asset('bundles/minicosilver/css/demo.css') }}" />#}
+            <link rel="stylesheet" href="{{ asset('bundles/minicosilver/css/customCombobox.css') }}" />
+            <link rel="stylesheet" href="{{ asset('bundles/epsjqgrid/css/ui.jqgrid.css') }}" />
+
+
+        {% endblock %}
+        {% block javascript %}
+            <script type="text/javascript" src="{{ asset('bundles/minicosilver/js/jquery.js') }}"></script>
+            <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+            <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/minicosilver/js/ui/jquery.ui.core.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/minicosilver/js/ui/jquery.ui.widget.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/minicosilver/js/ui/jquery.ui.datepicker.js') }}"></script>
+            <script>
+                $(function() {
+                    $( "#minico_silverbundle_sales_date" )
+                        .datepicker({ dateFormat: 'yy-mm-dd' });
+                    // $( "#minico_silverbundle_sales_date" )
+                    //   .datepicker('setDate', new Date());
+                    $( "#form_dateStart" )
+                        .datepicker({ dateFormat: 'yy-mm-dd' });
+                    //                    $( "#form_dateStart" )
+                    //                        .datepicker('setDate', new Date());
+                    $( "#form_dateEnd" )
+                        .datepicker({ dateFormat: 'yy-mm-dd' });
+                        //                    $( "#form_dateEnd" )
+                        //                        .datepicker('setDate', new Date());
+                });
+            </script>
+            <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+            <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+            <script type="text/javascript" src="{{ asset('bundles/minicosilver/js/customCombobox.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/minicosilver/js/comboFunctions.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/epsjqgrid/js/i18n/grid.locale-fr.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/epsjqgrid/js/jquery.jqGrid.min.js') }}"></script>
+
+        {% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
+{% endblock %}
+<div class="header clear-fix">
+{% block content_header %}
+    {% block content_header_more %}
+        <div style="float: left;" class="menu-div">
+            <a href="{{ path('products') }}">Produse</a>&nbsp;
+            <a href="{{ path('category') }}">Categorii de produse</a>&nbsp;
+            <a href="{{ path('entries') }}">Intrari</a>&nbsp;
+            <a href="{{ path('sales') }}">Vanzari</a>&nbsp;
+            <a href="{{ path('storage') }}">Gestiuni</a>&nbsp;
+            <a href="{{ path('transfer') }}">Bonuri de transfer</a>&nbsp;
+            <a href="{{ path('suppliers') }}">Furnizori</a>&nbsp;
+            <a href="{{ path('withdrawls') }}">Retrageri</a>&nbsp;
+            <a href="{{ path('minico_silver_report') }}">Rapoarte</a>&nbsp;
+            {#<a href="{{ path('sales_search_by_pn') }}">Cautare dupa cod produs</a>&nbsp;#}
+            {#<a href="{{ path('add_new_entries') }}">Adauga noi produse</a>&nbsp;#}
+        </div>
+        <br/>
+    {% endblock %}
+{% endblock %}
+</div>
+{% block body %}
+        {#{% block content_header %}#}
+
+        {#{% endblock %}#}
+        {#{% block body %}{% endblock %}#}
+        {#{% block javascripts %}{% endblock %}#}
+{% endblock %}

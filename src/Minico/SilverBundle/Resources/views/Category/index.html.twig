@@ -1,0 +1,98 @@
+{% extends 'MinicoSilverBundle::base.html.twig' %}
+{% block head %}
+    <meta charset="UTF-8" />
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    {% block stylesheets %}
+        {{ parent() }}
+        {#<link rel="stylesheet" href="{{ asset('bundles/minicosilver/css/jquery-ui.css') }}">#}
+        <link rel="stylesheet" href="{{ asset('bundles/epsjqgrid/js/i18n/grid.locale-fr.js') }}">
+        <link rel="stylesheet" href="{{ asset('bundles/epsjqgrid/js/jquery.jqGrid.min.js') }}">
+
+    {% endblock %}
+    {% block javascript %}
+        {{ parent() }}
+        {#<script type="text/javascript" src="{{ asset('bundles/minicosilver/js/jquery.js') }}"></script>#}
+        <script type="text/javascript" src="{{ asset('bundles/epsjqgrid/css/ui.jqgrid.css') }}"></script>
+    {% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
+{% endblock %}
+
+{% block body -%}
+    <h1>Category list</h1>
+    <ul>
+        <li>
+            <a href="{{ path('category_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {#<table class="records_list">#}
+        {#<thead>#}
+            {#<tr>#}
+                {#<th>Id</th>#}
+                {#<th>Name</th>#}
+                {#<th>Actions</th>#}
+            {#</tr>#}
+        {#</thead>#}
+        {#<tbody>#}
+        {#{% for entity in entities %}#}
+            {#<tr>#}
+                {#<td><a href="{{ path('category_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>#}
+                {#<td>{{ entity.name }}</td>#}
+                {#<td>#}
+                {#<ul>#}
+                    {#<li>#}
+                        {#<a href="{{ path('category_show', { 'id': entity.id }) }}">show</a>#}
+                    {#</li>#}
+                    {#<li>#}
+                        {#<a href="{{ path('category_edit', { 'id': entity.id }) }}">edit</a>#}
+                    {#</li>#}
+                {#</ul>#}
+                {#</td>#}
+            {#</tr>#}
+        {#{% endfor %}#}
+        {#</tbody>#}
+    {#</table>#}
+    {#<ul>#}
+        {#<li>#}
+            {#<a href="{{ path('category_new') }}">#}
+                {#Create a new entry#}
+            {#</a>#}
+        {#</li>#}
+    {#</ul>#}
+
+    {# total items count #}
+    <table>
+        <tr>
+            {# sorting of properties based on query components #}
+            <th>{{ knp_pagination_sortable(pagination, 'Id', 'a.id') }}</th>
+            <th{% if pagination.isSorted('a.name') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Name', 'a.name') }}</th>
+            <th>Actions</th>
+        </tr>
+
+        {# table body #}
+        {% for category in pagination %}
+            <tr {% if loop.index is odd %} class="color" {% endif %}>
+                <td>{{ category.id }}</td>
+                <td>{{ category.name }}</td>
+                <td>
+                    <ul>
+                        <li>
+                        <a href="{{ path('category_show', { 'id': category.id }) }}">show</a>
+                        </li>
+                        <li>
+                        <a href="{{ path('category_edit', { 'id': category.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    {# display navigation #}
+    <div class="navigation">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+{% endblock %}
+
+

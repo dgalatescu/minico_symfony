@@ -1,0 +1,80 @@
+{% extends 'MinicoSilverBundle::base.html.twig' %}
+
+{% block body -%}
+    {% include 'MinicoSilverBundle:Report:meniu.html.twig' %}
+    <br/>
+    <h2>Raport stoc per gestiune</h2>
+    {{ form(form) }}
+    <br/>
+    {% if products|length > 0 %}
+        <table width="300px">
+            <tr>
+                <th>Cod produs</th>
+                <th>Furnizor</th>
+                <th>Categorie</th>
+                <th>Cant stoc</th>
+                <th>Pret intrare</th>
+                <th>Total intrare</th>
+                <th>Pret vanzare</th>
+            </tr>
+            {#{% for key,product in products %}#}
+            {% set totalEntry = 0 %}
+            {% set totalQty = 0 %}
+            {% for productArray in products %}
+                {% if (productArray.qty != 0 and suppliers is empty) or
+                        ( productArray.qty != 0 and suppliers is not empty and productArray.product.supplier.id in suppliers) %}
+                    {% set totalEntryLine = productArray.product.entryPrice * productArray.qty  %}
+                    {% set totalEntry = totalEntry + totalEntryLine %}
+                    {% set totalQty = totalQty + productArray.qty %}
+                    <tr align="center">
+                        <td>
+                            {{ productArray.product.productCode }}
+                        </td>
+                        <td>
+                            {{ productArray.product.supplier }}
+                        </td>
+                        <td>
+                            {{ productArray.product.category }}
+                        </td>
+                        <td>
+                            {{ productArray.qty }}
+                        </td>
+                        <td>
+                            {{ productArray.product.entryPrice }}
+                        </td>
+                        <td>
+                            {{ totalEntryLine }}
+                        </td>
+                        <td>
+                            {#{% if productArray.product.productDescription != '' %}#}
+                                {#{{ productArray.product.productDescription }}#}
+                                {#<br/>#}
+                            {#{% endif %}#}
+                            {{ productArray.product.salePrice }}
+                        </td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+            <tr align="center">
+                <td>
+                    Total:
+                </td>
+                <td>
+                    &nbsp;
+                </td>
+                <td>
+                    &nbsp;
+                </td>
+                <td>
+                    {{ totalQty }}
+                </td>
+                <td>
+                    {{ totalEntry }}
+                </td>
+                <td>
+                    &nbsp;
+                </td>
+            </tr>
+        </table>
+    {% endif %}
+{% endblock %}
