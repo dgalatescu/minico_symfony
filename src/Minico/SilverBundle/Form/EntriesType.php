@@ -28,16 +28,22 @@ class EntriesType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $arr = array(
+            'class' => 'MinicoSilverBundle:Products',
+            'property'=>'productCode',
+            'label' => 'Product',
             'required' => true,
         );
         if ($this->productId != null) {
-            $arr ['data'] = $this->productId;
+            $arr ['data'] = $this->em->getReference(
+                    "MinicoSilverBundle:Products",
+                    $this->productId
+                    );
         }
 
         $builder
             ->add(
                 'productId',
-                null,
+                'entity', 
                 $arr
             )
             ->add(

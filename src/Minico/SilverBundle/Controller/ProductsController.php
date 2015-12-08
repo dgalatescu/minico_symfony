@@ -2,7 +2,6 @@
 
 namespace Minico\SilverBundle\Controller;
 
-use Minico\SilverBundle\Entity\Entries;
 use Minico\SilverBundle\Form\EntriesType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
