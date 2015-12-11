@@ -40,6 +40,50 @@
         {{ form(entries_form) }}
     </div>
 
+    <h3 align="center">Intrari in gestiune:</h3>
+
+    <div align="center">
+        <table class="record_properties">
+            <tbody>
+            <tr>
+                <th>Qty</th>
+                <th>Date</th>
+                <th>Storage</th>
+            </tr>
+            {% for entrie in entries %}
+                <tr>
+                    <td>{{ entrie.quantity }}</td>
+                    <td>{{ entrie.date |date('Y-m-d') }}</td>
+                    <td>{{ entrie.storage }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <h3 align="center">Transferuri:</h3>
+
+    <div align="center">
+        <table class="record_properties">
+            <tbody>
+            <tr>
+                <th>Qty</th>
+                <th>fromStorage</th>
+                <th>toStorage</th>
+                <th>creationDate</th>
+            </tr>
+            {% for transfer in transfers %}
+                <tr>
+                    <td>{{ transfer.qty }}</td>
+                    <td>{{ transfer.fromStorage  }}</td>
+                    <td>{{ transfer.toStorage }}</td>
+                    <td>{{ transfer.creationDate | date('Y-m-d') }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
     <ul class="record_actions">
         <li>
             <a href="{{ path('products') }}">

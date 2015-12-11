@@ -2,6 +2,8 @@
 
 namespace Minico\SilverBundle\Controller;
 
+use Minico\SilverBundle\Entity\Entries;
+use Minico\SilverBundle\Entity\Transfer;
 use Minico\SilverBundle\Form\EntriesType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -111,6 +113,7 @@ class ProductsController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
+        /** @var Products $entity */
         $entity = $em->getRepository('MinicoSilverBundle:Products')->find($id);
 
         if (!$entity) {
@@ -128,10 +131,18 @@ class ProductsController extends Controller
                 )
             );
 
+        /** @var Entries[] $entries */
+        $entries = $entity->getEntries();
+
+        /** @var Transfer[] $transfers */
+        $transfers = $entity->getTransfers();
+
         return array(
             'entity'      => $entity,
             'entries_form' => $entries_form->createView(),
             'delete_form' => $deleteForm->createView(),
+            'entries' => $entries,
+            'transfers' => $transfers,
         );
     }
 
