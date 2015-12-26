@@ -84,7 +84,7 @@ class SalesController extends Controller
                 array(
                     'class' => 'MinicoSilverBundle:Storage',
                     'choices'     => $saleStorages,
-                    'empty_value' => 'Choose an option',
+                    'empty_value' => 'All',
                     'required' => false
                 )
             )

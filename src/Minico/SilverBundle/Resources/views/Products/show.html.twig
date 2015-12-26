@@ -40,49 +40,63 @@
         {{ form(entries_form) }}
     </div>
 
-    <h3 align="center">Intrari in gestiune:</h3>
-
-    <div align="center">
-        <table class="record_properties">
-            <tbody>
-            <tr>
-                <th>Qty</th>
-                <th>Date</th>
-                <th>Storage</th>
-            </tr>
-            {% for entrie in entries %}
+    {% if entriesShow %}
+        <h3 align="center">Intrari in gestiune:</h3>
+        <div align="center">
+            <table class="record_properties">
+                <tbody>
                 <tr>
-                    <td>{{ entrie.quantity }}</td>
-                    <td>{{ entrie.date |date('Y-m-d') }}</td>
-                    <td>{{ entrie.storage }}</td>
+                    <th>Modify</th>
+                    <th>Qty</th>
+                    <th>Date</th>
+                    <th>Storage</th>
                 </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-    </div>
+                {% for entrie in entries %}
+                    <tr>
+                        <td>
+                            <a href="{{ path('entries_edit', { 'id': entrie.id }) }}">
+                                Edit
+                            </a>
+                        </td>
+                        <td>{{ entrie.quantity }}</td>
+                        <td>{{ entrie.date |date('Y-m-d') }}</td>
+                        <td>{{ entrie.storage }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
 
-    <h3 align="center">Transferuri:</h3>
-
-    <div align="center">
-        <table class="record_properties">
-            <tbody>
-            <tr>
-                <th>Qty</th>
-                <th>fromStorage</th>
-                <th>toStorage</th>
-                <th>creationDate</th>
-            </tr>
-            {% for transfer in transfers %}
+    {% if transfersShow %}
+        <h3 align="center">Transferuri:</h3>
+        <div align="center">
+            <table class="record_properties">
+                <tbody>
                 <tr>
-                    <td>{{ transfer.qty }}</td>
-                    <td>{{ transfer.fromStorage  }}</td>
-                    <td>{{ transfer.toStorage }}</td>
-                    <td>{{ transfer.creationDate | date('Y-m-d') }}</td>
+                    <th>Modify</th>
+                    <th>Qty</th>
+                    <th>fromStorage</th>
+                    <th>toStorage</th>
+                    <th>creationDate</th>
                 </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-    </div>
+                {% for transfer in transfers %}
+                    <tr>
+                        <td>
+                            <a href="{{ path('transfer_edit', { 'id': transfer.id }) }}">
+                                Edit
+                            </a>
+                        </td>
+                        <td>{{ transfer.qty }}</td>
+                        <td>{{ transfer.fromStorage  }}</td>
+                        <td>{{ transfer.toStorage }}</td>
+                        <td>{{ transfer.creationDate | date('Y-m-d') }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
 
     <ul class="record_actions">
         <li>

@@ -5,6 +5,7 @@ namespace Minico\SilverBundle\Controller;
 use Minico\SilverBundle\Entity\Entries;
 use Minico\SilverBundle\Entity\Transfer;
 use Minico\SilverBundle\Form\EntriesType;
+use Minico\SilverBundle\Form\ProductAndOffsetType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -28,14 +29,40 @@ class ProductsController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
+        $filter = array();
+        $offset = 0;
+        $form = $this->createForm(new ProductAndOffsetType(), null, array(
+            'action' => $this->generateUrl('products'),
+            'method' => 'POST',
+        ));
+        $form->add('submit', 'submit', array('label' => 'Filter',));
 
-        $entities = $em->getRepository('MinicoSilverBundle:Products')->findAll();
+        if ($request->isMethod('POST')) {
+            $formPostData = $request->request->get('productAndOffset', array());
+            if (!empty($formPostData["code"])) {
+                $filter = array(
+                    'productCode' => $formPostData["code"]
+                );
+            }
+
+            if (!empty($formPostData["offset"])) {
+                $offset = $formPostData["offset"];
+            }
+        }
+
+        $entities = $em->getRepository('MinicoSilverBundle:Products')->findBy(
+            $filter,
+            array(),
+            100,
+            $offset
+        );
 
         return array(
             'entities' => $entities,
+            'form' => $form->createView(),
         );
     }
     /**
@@ -131,16 +158,25 @@ class ProductsController extends Controller
                 )
             );
 
+        $entriesShow = false;
         /** @var Entries[] $entries */
         $entries = $entity->getEntries();
-
+        if (count($entries)) {
+            $entriesShow = true;
+        }
+        $transfersShow = false;
         /** @var Transfer[] $transfers */
         $transfers = $entity->getTransfers();
+        if (count($transfers)) {
+            $transfersShow = true;
+        }
 
         return array(
             'entity'      => $entity,
             'entries_form' => $entries_form->createView(),
             'delete_form' => $deleteForm->createView(),
+            'entriesShow' => $entriesShow,
+            'transfersShow' => $transfersShow,
             'entries' => $entries,
             'transfers' => $transfers,
         );
