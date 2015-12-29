@@ -256,8 +256,7 @@ class EntriesController extends Controller
 
     public function addNewEntriesAction()
     {
-        $em = $this->getDoctrine()->getEntityManager();
-
+        $em = $this->getDoctrine()->getManager();
         /** @var CategoryRepository $categoryRepository */
         $categoryRepository = $em->getRepository('MinicoSilverBundle:Category');
 

@@ -14,8 +14,10 @@
             {#<link rel="stylesheet" href="{{ asset('bundles/minicosilver/css/demo.css') }}" />#}
             <link rel="stylesheet" href="{{ asset('bundles/minicosilver/css/customCombobox.css') }}" />
             <link rel="stylesheet" href="{{ asset('bundles/epsjqgrid/css/ui.jqgrid.css') }}" />
-
-
+            <link rel="stylesheet" type="text/css" href="{{ asset('bundles/minicosilver/css/dataTables/jquery.dataTables.css') }}">
+            <link rel="stylesheet" type="text/css" href="{{ asset('bundles/minicosilver/css/dataTables/shCore.css') }}">
+            <link rel="stylesheet" type="text/css" href="{{ asset('bundles/minicosilver/css/dataTables/demo.css') }}">
+            <style type="text/css" class="init"></style>
         {% endblock %}
         {% block javascript %}
             <script type="text/javascript" src="{{ asset('bundles/minicosilver/js/jquery.js') }}"></script>
@@ -46,7 +48,11 @@
             <script type="text/javascript" src="{{ asset('bundles/minicosilver/js/comboFunctions.js') }}"></script>
             <script type="text/javascript" src="{{ asset('bundles/epsjqgrid/js/i18n/grid.locale-fr.js') }}"></script>
             <script type="text/javascript" src="{{ asset('bundles/epsjqgrid/js/jquery.jqGrid.min.js') }}"></script>
-
+            
+            <script type="text/javascript" src="{{ asset('bundles/minicosilver/js/dataTables/jquery.dataTables.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/minicosilver/js/dataTables/shCore.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/minicosilver/js/dataTables/demo.js') }}"></script>
+            
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 
